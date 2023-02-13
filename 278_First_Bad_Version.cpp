@@ -1,19 +1,33 @@
 /*
-Given an integer n, return true if it is a power of two. Otherwise, return false.
+You are a product manager and currently leading a team to develop a new product. Unfortunately, the latest version of your product fails the quality check. Since each version is developed based on the previous version, all the versions after a bad version are also bad.
 
-An integer n is a power of two, if there exists an integer x such that n == 2^x.
+Suppose you have n versions [1, 2, ..., n] and you want to find out the first bad one, which causes all the following ones to be bad.
+
+You are given an API bool isBadVersion(version) which returns whether version is bad. Implement a function to find the first bad version. You should minimize the number of calls to the API.
 
 
 */
 
+// The API isBadVersion is defined for you.
+// bool isBadVersion(int version);
+
 class Solution {
 public:
+    int firstBadVersion(long int n) {
+        long int k = 0;
+        while (n > k + 1) {
+            
+            if (!isBadVersion((n + k) / 2)) {
+                
+                k = (n + k) / 2;
+            }
+            else {
+                
+                n = (n + k) / 2;
+            }
+        }
 
-    bool isPowerOfTwo(int n) {
+        return n;
         
-        if (n > 0 && (n & (n - 1)) == 0) return 1;
-        else return 0;
-        
-
     }
 };
